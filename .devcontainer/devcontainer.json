@@ -1,0 +1,14 @@
+{
+  "name": "Willem Discord Bot",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:1-20-bookworm",
+  "customizations": {
+    "vscode": {
+      "extensions": ["PKief.material-icon-theme", "esbenp.prettier-vscode"],
+      "settings": {
+        "workbench.iconTheme": "material-icon-theme"
+      }
+    }
+  },
+  "postCreateCommand": "npm install",
+  "forwardPorts": []
+}
