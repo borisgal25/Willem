@@ -1,13 +1,21 @@
 module.exports = async (client, guildId) => {
-    let ApplicationCommands;
+  let applicationCommands;
 
-    if (guildId) {
-        const guild = await client.guilds.fetch(guildId);
-        ApplicationCommands = guild.commands;
-    } else {
-            ApplicationCommands = client.application.commands;
-        }
+  if (guildId) {
+    try {
+      const guild = await client.guilds.fetch(guildId);
+      applicationCommands = guild.commands;
+    } catch (error) {
+      console.log(
+        `⚠️ Could not fetch test server (${guildId}). Falling back to global commands.`,
+      );
+      console.log(`   Error: ${error.message}`);
+      applicationCommands = await client.application.commands;
+    }
+  } else {
+    applicationCommands = await client.application.commands;
+  }
 
-    await ApplicationCommands.fetch();
-    return ApplicationCommands;
-}
+  await applicationCommands.fetch();
+  return applicationCommands;
+};
